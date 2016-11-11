@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Connect.qml</file>
+        <file>Task.qml</file>
+    </qresource>
+    <qresource prefix="/Img"/>
+</RCC>
