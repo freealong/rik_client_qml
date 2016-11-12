@@ -119,6 +119,17 @@ int TcpClient::upload_robot_info(dh_table &t, joints_limits &jl)
     return 0;
 }
 
+int TcpClient::set_motors(Eigen::VectorXf &t)
+{
+    if (!is_robot_ready())
+        return -1;
+
+    std::string msg("set motor max speed");
+    write(sockfd, msg);
+    write(sockfd, t);
+    return 0;
+}
+
 int TcpClient::get_current_pose(Eigen::VectorXf &v)
 {
     if (!is_robot_ready())

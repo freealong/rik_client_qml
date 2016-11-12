@@ -4,15 +4,15 @@
 
 int RIK_Client::connect_server(QString address, int port)
 {
-    const char * addr = address.toStdString().c_str();
-    ucli.connect_server(addr, port);
+    std::string addr = address.toStdString();
+    ucli.connect_server(addr.c_str(), port);
     if(!ucli.isTcpListen)
     {
         qDebug() << "Error on UDP connecting";
         return -1;
     }
     int tcp_port = ucli.tcp_port;
-    if (cli.connect_server(addr, tcp_port) < 0)
+    if (cli.connect_server(addr.c_str(), tcp_port) < 0)
     {
         qDebug() << "Error on TCP connecting";
         return -1;
@@ -47,6 +47,13 @@ int RIK_Client::switch_motor(bool on)
         return cli.send_msg("stop motor");
 }
 
+int RIK_Client::set_motors(int j1, int j2, int j3, int j4, int j5, int j6)
+{
+    Eigen::VectorXf t(6);
+    t << j1, j2, j3, j4, j5, j6;
+    return cli.set_motors(t);
+}
+
 int RIK_Client::send_mode(int m)
 {
     return cli.send_mode(m);
@@ -56,7 +63,6 @@ int RIK_Client::send_target_joints(int j1, int j2, int j3, int j4, int j5, int j
 {
     Eigen::VectorXf t(6);
     t << j1, j2, j3, j4, j5, j6;
-    qDebug() << j1;
     return cli.send_target_joints(t);
 }
 
@@ -104,7 +110,12 @@ void RIK_Client::get_pose()
     for (int i = 0; i < p.size(); ++i) {
         qDebug() << p(i);
     }
-//    return p;
+    //    return p;
+}
+
+int RIK_Client::send_increasing_mode(bool running, int mode, int num, float speed)
+{
+    return cli.send_increasing_mode(running, mode, num, speed);
 }
 
 int RIK_Client::download_robot_info()

@@ -2,6 +2,8 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>Connect.qml</file>
+        <file>Mode.qml</file>
+        <file>Settings.qml</file>
         <file>Task.qml</file>
     </qresource>
     <qresource prefix="/Img"/>

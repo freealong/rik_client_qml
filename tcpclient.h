@@ -34,6 +34,7 @@ public:
     int release_robot();
     int download_robot_info(dh_table& t, joints_limits& jl);
     int upload_robot_info(dh_table& t, joints_limits& jl);
+    int set_motors(Eigen::VectorXf &t);
     int get_current_pose(Eigen::VectorXf &v);
     int get_current_joints(Eigen::VectorXf &v);
     int send_target(Eigen::VectorXf &target, int mode);

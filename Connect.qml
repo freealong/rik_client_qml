@@ -115,12 +115,12 @@ Item {
                 MouseArea {
                     anchors.fill: parent
                     onClicked: {
-                        if (connect_wgt.anchors.bottomMargin === -height) {
-                            connect_wgt.anchors.bottomMargin = -connect_wgt.height
-                            connect_page.activeFocus
-                        }
-                        else
-                            connect_wgt.anchors.bottomMargin = -height
+//                        if (connect_wgt.anchors.bottomMargin === -height) {
+//                            connect_wgt.anchors.bottomMargin = -connect_wgt.height
+//                            connect_page.activeFocus
+//                        }
+//                        else
+//                            connect_wgt.anchors.bottomMargin = -height
                     }
                 }
             }
