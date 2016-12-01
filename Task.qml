@@ -18,10 +18,10 @@ Item {
 
         TableView {
             id: task_tv
-            width: 400
-            height: 600
+            width: parent.width * 0.9
+            height: parent.height * 0.7
             anchors.top: parent.top
-            anchors.topMargin: 50
+            anchors.topMargin: 30
             anchors.horizontalCenter: parent.horizontalCenter
 
             TableViewColumn {
@@ -36,11 +36,11 @@ Item {
                 width: 300
             }
 
-            itemDelegate:
-                TextInput {
-                    text: ""
-                    onAccepted: model.setProperty(rowIndex, itemProperty, text)
-                }
+//            itemDelegate:
+//                TextInput {
+//                    text: ""
+//                    onAccepted: model.setProperty(rowIndex, itemProperty, text)
+//                }
 
             model: task_lm
         }
@@ -62,13 +62,30 @@ Item {
         }
 
         Row {
+            id: row_task
             anchors.top: loop_setting.bottom
             anchors.topMargin: 30
+            anchors.horizontalCenter: parent.horizontalCenter
+            spacing: 20
+
+            TextField {
+                id: type_tf
+                text: "0"
+            }
+            TextField {
+                id: params_tf
+                text: "860,0,846,0,0,0"
+            }
+        }
+
+        Row {
+            anchors.top: row_task.bottom
+            anchors.topMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
 
             Button {
                 text: "add row"
-                onClicked: task_lm.append({"type": "Line", "Params": "860,0,846,0,0,0,5000"})
+                onClicked: task_lm.append({"type": type_tf.text, "params": params_tf.text})
             }
             Button {
                 text: "delete row"
@@ -77,9 +94,20 @@ Item {
             Button {
                 text: "send task"
                 onClicked: {
-
+                    var s1 = "", s2 = ""
+                    for (var i = 0; i < task_lm.count; i++) {
+                        s1 += task_lm.get(i).type;
+                        s1 += ";"
+                        s2 += task_lm.get(i).params;
+                        s2 += ";"
+                    }
+                    //console.log(s1, s2)
+                    Client.send_task(s1, s2, loop_times.text)
                 }
             }
         }
     }
 }
+
+
+

@@ -14,7 +14,7 @@ Item {
         Row {
             id: mode_row
             anchors.top: parent.top
-            anchors.topMargin: 50
+            anchors.topMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: 10
 
@@ -38,22 +38,15 @@ Item {
                         joints_mode_ly.visible = false;
                         path_mode_ly.visible = true;
                     }
-
+                    Client.send_mode(currentIndex)
                 }
-            }
-            Button {
-                text: "set mode"
-                background: Rectangle {
-                    border.color: "#888"
-                }
-                onClicked: Client.send_mode(mode_comb.currentIndex)
             }
         }
 
         GridLayout {
             id: show_ly
             anchors.top: mode_row.bottom
-            anchors.topMargin: 20
+            anchors.topMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
 
             columns: 2
@@ -111,17 +104,13 @@ Item {
 
             Button {
                 text: "show current joints"
-                background: Rectangle {
-                    border.color: "#888"
-                }
+
                 onClicked: Client.get_joints()
 
             }
             Button {
                 text: "show current pose"
-                background: Rectangle {
-                    border.color: "#888"
-                }
+
                 onClicked: Client.get_pose()
             }
         } // show joints and pose
@@ -129,7 +118,7 @@ Item {
         Rectangle {
             id: joints_mode_ly
             anchors.top: show_ly.bottom
-            anchors.topMargin: 20
+            anchors.topMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
             visible: false
 
@@ -142,7 +131,7 @@ Item {
                 }
                 TextField {
                     id: j1
-                    text: ""
+                    text: "0"
                 }
                 Button {
                     text: "-"
@@ -161,7 +150,7 @@ Item {
                 }
                 TextField {
                     id: j2
-                    text: ""
+                    text: "-90"
                 }
                 Button {
                     text: "-"
@@ -179,7 +168,7 @@ Item {
                 }
                 TextField {
                     id: j3
-                    text: ""
+                    text: "-90"
                 }
                 Button {
                     text: "-"
@@ -197,7 +186,7 @@ Item {
                 }
                 TextField {
                     id: j4
-                    text: ""
+                    text: "0"
                 }
                 Button {
                     text: "-"
@@ -215,7 +204,7 @@ Item {
                 }
                 TextField {
                     id: j5
-                    text: ""
+                    text: "-90"
                 }
                 Button {
                     text: "-"
@@ -233,7 +222,7 @@ Item {
                 }
                 TextField {
                     id: j6
-                    text: ""
+                    text: "0"
                 }
                 Button {
                     text: "-"
@@ -251,9 +240,7 @@ Item {
                 anchors.topMargin: 20
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: "send target joints"
-                background: Rectangle {
-                    border.color: "#888"
-                }
+
                 onClicked: Client.send_target_joints(j1.text, j2.text, j3.text, j4.text, j5.text, j6.text)
             }
         } // joints
@@ -261,7 +248,7 @@ Item {
         Rectangle {
             id: pose_mode_ly
             anchors.top: show_ly.bottom
-            anchors.topMargin: 20
+            anchors.topMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
             visible: false
 
@@ -275,7 +262,7 @@ Item {
                 }
                 TextField {
                     id: px
-                    text: ""
+                    text: "860"
                 }
                 Button {
                     text: "-"
@@ -293,7 +280,7 @@ Item {
                 }
                 TextField {
                     id: py
-                    text: ""
+                    text: "0"
                 }
                 Button {
                     text: "-"
@@ -311,7 +298,7 @@ Item {
                 }
                 TextField {
                     id: pz
-                    text: ""
+                    text: "846"
                 }
                 Button {
                     text: "-"
@@ -329,7 +316,7 @@ Item {
                 }
                 TextField {
                     id: pa
-                    text: ""
+                    text: "0"
                 }
                 Button {
                     text: "-"
@@ -347,7 +334,7 @@ Item {
                 }
                 TextField {
                     id: pb
-                    text: ""
+                    text: "0"
                 }
                 Button {
                     text: "-"
@@ -365,7 +352,7 @@ Item {
                 }
                 TextField {
                     id: pc
-                    text: ""
+                    text: "0"
                 }
                 Button {
                     text: "-"
@@ -383,9 +370,7 @@ Item {
                 anchors.topMargin: 20
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: "send target pose"
-                background: Rectangle {
-                    border.color: "#888"
-                }
+
                 onClicked: Client.send_target_pose(Qt.vector3d(px.text, py.text, pz.text),
                                                    Qt.vector3d(pa.text, pb.text, pc.text))
             }
@@ -394,7 +379,7 @@ Item {
         Rectangle {
             id: path_mode_ly
             anchors.top: show_ly.bottom
-            anchors.topMargin: 20
+            anchors.topMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
 
             ComboBox {
@@ -420,7 +405,7 @@ Item {
             GridLayout {
                 id: line_grid
                 anchors.top: path_type.bottom
-                anchors.topMargin: 20
+                anchors.topMargin: 10
                 anchors.horizontalCenter: parent.horizontalCenter
                 columns: 2
                 Text {
@@ -476,7 +461,7 @@ Item {
             GridLayout {
                 id: arc_grid
                 anchors.top: path_type.bottom
-                anchors.topMargin: 20
+                anchors.topMargin: 10
                 anchors.horizontalCenter: parent.horizontalCenter
                 columns: 3
 
@@ -589,12 +574,10 @@ Item {
             Button {
                 id: path_send_btn
                 anchors.top: line_grid.bottom
-                anchors.topMargin: 20
+                anchors.topMargin: 10
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: "send target pose"
-                background: Rectangle {
-                    border.color: "#888"
-                }
+
                 onClicked: {
                     if (path_type.currentIndex === 0) {
                         Client.send_target_path(Qt.vector3d(line_x.text, line_y.text, line_z.text),

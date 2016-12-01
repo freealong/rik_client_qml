@@ -31,7 +31,7 @@ int RIK_Client::disconnect_server()
 int RIK_Client::switch_robot(bool on)
 {
     if (on)
-        return cli.load_robot() && download_robot_info() == 0;
+        return cli.load_robot() && download_robot_info() == 0 && send_mode(0);
     else
     {
         robot.clear();
@@ -116,6 +116,36 @@ void RIK_Client::get_pose()
 int RIK_Client::send_increasing_mode(bool running, int mode, int num, float speed)
 {
     return cli.send_increasing_mode(running, mode, num, speed);
+}
+
+int RIK_Client::send_task(QString s1, QString s2, int loop_num)
+{
+    std::vector<Eigen::VectorXf> tasks;
+    QStringList type_list = s1.split(";");
+    QStringList params_list = s2.split(";");
+
+    QStringList tmp;
+    for (int i = 0; i < type_list.size()-1; i++)
+    {
+        tmp = params_list.at(i).split(",");
+        if (type_list.at(i) == "0")
+        {
+            Eigen::VectorXf t(7);
+            t << tmp.at(0).toInt(), tmp.at(1).toInt(), tmp.at(2).toInt(), tmp.at(3).toInt(),
+                    tmp.at(4).toInt(), tmp.at(5).toInt(), tmp.at(6).toInt();
+            tasks.push_back(t);
+        }
+        else if (type_list.at(i) == "1")
+        {
+            Eigen::VectorXf t(14);
+            t << tmp.at(0).toInt(), tmp.at(1).toInt(), tmp.at(2).toInt(), tmp.at(3).toInt(),
+                    tmp.at(4).toInt(), tmp.at(5).toInt(), tmp.at(6).toInt(),
+                    tmp.at(7).toInt(), tmp.at(8).toInt(), tmp.at(9).toInt(),
+                    tmp.at(10).toInt(), tmp.at(11).toInt(), tmp.at(12).toInt(), tmp.at(13).toInt();
+            tasks.push_back(t);
+        }
+    }
+    cli.send_task(tasks, loop_num);
 }
 
 int RIK_Client::download_robot_info()

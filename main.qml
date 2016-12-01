@@ -6,7 +6,7 @@ import QtQuick.Controls 1.4
 Window {
     visible: true
     width: Screen.width * 0.5
-    height: width * 2
+    height: Screen.height * 0.8
     title: qsTr("RIK Client")
 
     TabView {
@@ -41,6 +41,7 @@ Window {
             }
         }
     }
+
 
 //    Rectangle {
 //        width: parent.width

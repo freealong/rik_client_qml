@@ -29,7 +29,7 @@ Item {
             }
             TextField {
                 id: ip
-                text: "127.0.0.1"
+                text: "169.254.11.10"
 
             }
             TextField {
@@ -39,9 +39,6 @@ Item {
             Button {
                 id: connect_btn
                 text: "connect"
-                background: Rectangle {
-                    border.color: "#888"
-                }
                 onClicked: if (Client.connect_server(ip.text, port.text) === 0) {
                                server_status.text = "connected"
                            }
@@ -49,9 +46,6 @@ Item {
             Button {
                 id: disconnect_btn
                 text: "disconnect"
-                background: Rectangle {
-                    border.color: "#666"
-                }
                 onClicked: if (Client.disconnect_server() === 0) {
                                server_status.text = "disconnected"
                            }

@@ -14,7 +14,7 @@ Item {
         GridLayout {
             id: joints_limit_gl
             anchors.top: parent.top
-            anchors.topMargin: 50
+            anchors.topMargin: 30
             anchors.horizontalCenter: parent.horizontalCenter
 
             columns: 4
@@ -37,12 +37,15 @@ Item {
             }
             TextField {
                 id: j1_min_angle
+                text: "-160"
             }
             TextField {
                 id: j1_max_angle
+                text: "160"
             }
             TextField {
                 id: j1_max_speed
+                text: "600"
             }
 
             Text {
@@ -50,12 +53,15 @@ Item {
             }
             TextField {
                 id: j2_min_angle
+                text: "-150"
             }
             TextField {
                 id: j2_max_angle
+                text: "-45"
             }
             TextField {
                 id: j2_max_speed
+                text: "600"
             }
 
             Text {
@@ -63,12 +69,15 @@ Item {
             }
             TextField {
                 id: j3_min_angle
+                text: "-135"
             }
             TextField {
                 id: j3_max_angle
+                text: "60"
             }
             TextField {
                 id: j3_max_speed
+                text: "600"
             }
 
             Text {
@@ -76,12 +85,15 @@ Item {
             }
             TextField {
                 id: j4_min_angle
+                text: "-180"
             }
             TextField {
                 id: j4_max_angle
+                text: "180"
             }
             TextField {
                 id: j4_max_speed
+                text: "600"
             }
 
             Text {
@@ -89,12 +101,15 @@ Item {
             }
             TextField {
                 id: j5_min_angle
+                text: "-180"
             }
             TextField {
                 id: j5_max_angle
+                text: "110"
             }
             TextField {
                 id: j5_max_speed
+                text: "600"
             }
 
             Text {
@@ -102,12 +117,15 @@ Item {
             }
             TextField {
                 id: j6_min_angle
+                text: "-180"
             }
             TextField {
                 id: j6_max_angle
+                text: "180"
             }
             TextField {
                 id: j6_max_speed
+                text: "600"
             }
         }
         Button {
@@ -116,9 +134,7 @@ Item {
             anchors.topMargin: 20
             anchors.horizontalCenter: parent.horizontalCenter
             text: "send joints settings"
-            background: Rectangle {
-                border.color: "#888"
-            }
+
             // @TODO: only set max speed now
             onClicked: Client.set_motors(j1_max_speed.text, j2_max_speed.text, j3_max_speed.text,
                                          j4_max_speed.text, j5_max_speed.text, j6_max_speed.text)

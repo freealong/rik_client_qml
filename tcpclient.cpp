@@ -231,6 +231,21 @@ int TcpClient::send_increasing_mode(bool running, int mode, int num, float speed
     return 0;
 }
 
+int TcpClient::send_task(std::vector<Eigen::VectorXf> &t, int n)
+{
+    if (!is_robot_ready())
+        return -1;
+
+    std::string msg("set task");
+    write(sockfd, msg);
+    int size = t.size();
+    write(sockfd, &size, sizeof(size));
+    for (int i = 0; i < size; ++i)
+        write(sockfd, t.at(i));
+    write(sockfd, &n, sizeof(n));
+    return 0;
+}
+
 void TcpClient::test()
 {
     std::string msg("test");

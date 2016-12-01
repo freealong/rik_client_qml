@@ -43,6 +43,7 @@ public:
     int send_target_path(Eigen::VectorXf &target);
     int send_mode(int mode);
     int send_increasing_mode(bool running, int mode, int num, float speed);
+    int send_task(std::vector<Eigen::VectorXf> &t, int n);
     void test();
 
 
