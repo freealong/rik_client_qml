@@ -65,13 +65,13 @@ Item {
                 id: robot_status
                 text: "not started"
             }
-            Text {
-                text: "motor status:"
-            }
-            Text {
-                id: motor_status
-                text: "not started"
-            }
+//            Text {
+//                text: "motor status:"
+//            }
+//            Text {
+//                id: motor_status
+//                text: "not started"
+//            }
 
             Text {
                 text: "Robot"
@@ -83,16 +83,16 @@ Item {
                                       robot_status.text = robot_switch.checked ? "started" : "not started"
                                   }
             }
-            Text {
-                text: "Motor"
-            }
-            Switch {
-                id: motor_switch
-                checked: false
-                onCheckedChanged: if (Client.switch_motor(motor_switch.checked) === 0) {
-                                      motor_status.text = robot_switch.checked ? "started" : "not started"
-                                  }
-            }
+//            Text {
+//                text: "Motor"
+//            }
+//            Switch {
+//                id: motor_switch
+//                checked: false
+//                onCheckedChanged: if (Client.switch_motor(motor_switch.checked) === 0) {
+//                                      motor_status.text = robot_switch.checked ? "started" : "not started"
+//                                  }
+//            }
 
         } // GridLayout
 

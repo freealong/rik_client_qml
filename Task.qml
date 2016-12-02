@@ -68,13 +68,20 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             spacing: 20
 
-            TextField {
+            ComboBox {
                 id: type_tf
-                text: "0"
+                model: [ "line", "arc"]
+                onCurrentIndexChanged: {
+                    if (type_tf.currentIndex === 0)
+                        params_tf.text = "860,0,694,90,0,-90,5000"
+                    else if (type_tf.currentIndex === 1)
+                        params_tf.text = "860,0,694,90,0,-90,860,0,694,90,0,-90,50,100"
+                }
             }
             TextField {
                 id: params_tf
-                text: "860,0,846,0,0,0"
+                width: task_page.width / 2
+                text: ""
             }
         }
 
@@ -85,24 +92,37 @@ Item {
 
             Button {
                 text: "add row"
-                onClicked: task_lm.append({"type": type_tf.text, "params": params_tf.text})
+                onClicked: task_lm.append({"type": type_tf.currentText, "params": params_tf.text})
             }
             Button {
                 text: "delete row"
                 onClicked: task_lm.remove(task_tv.currentRow)
             }
             Button {
+                text: "clear rows"
+                onClicked: task_lm.clear()
+            }
+            Text {
+                text: "  "
+            }
+            Button {
                 text: "send task"
                 onClicked: {
                     var s1 = "", s2 = ""
                     for (var i = 0; i < task_lm.count; i++) {
-                        s1 += task_lm.get(i).type;
+                        s1 += task_lm.get(i).type == "line" ? 0 : 1;
                         s1 += ";"
                         s2 += task_lm.get(i).params;
                         s2 += ";"
                     }
                     //console.log(s1, s2)
                     Client.send_task(s1, s2, loop_times.text)
+                }
+            }
+            Button {
+                text: "abort Task"
+                onClicked: {
+                    Client.send_msg("abort task")
                 }
             }
         }

@@ -33,6 +33,46 @@ Item {
             }
 
             Text {
+                text: " "
+            }
+            Text {
+                text: " "
+            }
+            Text {
+                text: " "
+            }
+            ComboBox {
+                id: speed_comb
+                model: [ "low speed", "middle speed", "high speed"]
+                onCurrentIndexChanged: {
+                    if (speed_comb.currentIndex === 0) {
+                        j1_max_speed.text = "200"
+                        j2_max_speed.text = "200"
+                        j3_max_speed.text = "200"
+                        j4_max_speed.text = "200"
+                        j5_max_speed.text = "200"
+                        j6_max_speed.text = "200"
+                    }
+                    else if (speed_comb.currentIndex === 1) {
+                        j1_max_speed.text = "1000"
+                        j2_max_speed.text = "1000"
+                        j3_max_speed.text = "1000"
+                        j4_max_speed.text = "1000"
+                        j5_max_speed.text = "1000"
+                        j6_max_speed.text = "1000"
+                    }
+                    else if (speed_comb.currentIndex === 2) {
+                        j1_max_speed.text = "60000"
+                        j2_max_speed.text = "60000"
+                        j3_max_speed.text = "60000"
+                        j4_max_speed.text = "60000"
+                        j5_max_speed.text = "60000"
+                        j6_max_speed.text = "60000"
+                    }
+                }
+            }
+
+            Text {
                 text: "J1"
             }
             TextField {

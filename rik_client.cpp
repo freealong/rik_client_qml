@@ -148,6 +148,11 @@ int RIK_Client::send_task(QString s1, QString s2, int loop_num)
     cli.send_task(tasks, loop_num);
 }
 
+int RIK_Client::send_msg(QString m)
+{
+    return cli.send_msg(m.toStdString());
+}
+
 int RIK_Client::download_robot_info()
 {
     dh_table t;
