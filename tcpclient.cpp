@@ -246,6 +246,17 @@ int TcpClient::send_task(std::vector<Eigen::VectorXf> &t, int n)
     return 0;
 }
 
+int TcpClient::send_demo(int type)
+{
+    if (!is_robot_ready())
+        return -1;
+
+    std::string msg("run demo");
+    write(sockfd, msg);
+    write(sockfd, &type, sizeof(type));
+    return 0;
+}
+
 void TcpClient::test()
 {
     std::string msg("test");

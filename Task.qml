@@ -7,6 +7,9 @@ import QtQuick.Controls.Styles 1.4
 import RIK_Client 1.0
 
 Item {
+
+
+
     Rectangle {
         id: task_page
         height: parent.height
@@ -19,7 +22,7 @@ Item {
         TableView {
             id: task_tv
             width: parent.width * 0.9
-            height: parent.height * 0.7
+            height: parent.height * 0.5
             anchors.top: parent.top
             anchors.topMargin: 30
             anchors.horizontalCenter: parent.horizontalCenter
@@ -86,6 +89,7 @@ Item {
         }
 
         Row {
+            id: row_command
             anchors.top: row_task.bottom
             anchors.topMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
@@ -124,6 +128,21 @@ Item {
                 onClicked: {
                     Client.send_msg("abort task")
                 }
+            }
+        }
+
+        Row {
+            anchors.top: row_command.bottom
+            anchors.topMargin: 10
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            ComboBox {
+                id: demo_id
+                model: [ "None", "Demo1"]
+            }
+            Button {
+                text: "Switch demo"
+                onClicked: Client.send_demo(demo_id.currentIndex);
             }
         }
     }

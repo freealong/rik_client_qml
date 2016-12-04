@@ -44,6 +44,7 @@ public:
     int send_mode(int mode);
     int send_increasing_mode(bool running, int mode, int num, float speed);
     int send_task(std::vector<Eigen::VectorXf> &t, int n);
+    int send_demo(int type);
     void test();
 
 

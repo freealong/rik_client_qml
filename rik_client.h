@@ -42,6 +42,7 @@ public slots:
     int send_increasing_mode(bool running, int mode, int num, float speed);
     int send_task(QString s1, QString s2, int loop_num);
     int send_msg(QString m);
+    int send_demo(int t);
 
 private:
     int download_robot_info();

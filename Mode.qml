@@ -298,7 +298,7 @@ Item {
                 }
                 TextField {
                     id: pz
-                    text: "846"
+                    text: "694"
                 }
                 Button {
                     text: "-"

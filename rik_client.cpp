@@ -153,6 +153,11 @@ int RIK_Client::send_msg(QString m)
     return cli.send_msg(m.toStdString());
 }
 
+int RIK_Client::send_demo(int t)
+{
+    return cli.send_demo(t);
+}
+
 int RIK_Client::download_robot_info()
 {
     dh_table t;
