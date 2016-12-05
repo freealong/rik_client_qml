@@ -130,9 +130,11 @@ int RIK_Client::send_task(QString s1, QString s2, int loop_num)
         tmp = params_list.at(i).split(",");
         if (type_list.at(i) == "0")
         {
-            Eigen::VectorXf t(7);
-            t << tmp.at(0).toInt(), tmp.at(1).toInt(), tmp.at(2).toInt(), tmp.at(3).toInt(),
-                    tmp.at(4).toInt(), tmp.at(5).toInt(), tmp.at(6).toInt();
+            Eigen::VectorXf t(tmp.size());
+            for (int i = 0; i < t.size(); ++i)
+            {
+                t(i) = tmp.at(i).toInt();
+            }
             tasks.push_back(t);
         }
         else if (type_list.at(i) == "1")

@@ -6,6 +6,11 @@ import QtQuick.Controls.Styles 1.4
 import RIK_Client 1.0
 
 Item {
+    onVisibleChanged: {
+        if (visible)
+            Client.send_mode(mode_comb.currentIndex)
+    }
+
     Rectangle {
         id: mode_page
         height: parent.height
