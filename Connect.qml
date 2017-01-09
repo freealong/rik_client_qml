@@ -29,7 +29,7 @@ Item {
             }
             TextField {
                 id: ip
-                text: "169.254.11.10"
+                text: "192.168.1.110"
 
             }
             TextField {

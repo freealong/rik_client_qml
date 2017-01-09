@@ -9,11 +9,14 @@
 #include "tcpclient.h"
 #include "robotinfo.h"
 
+#include "fstream"
+using namespace  std;
+
 class RIK_Client : public QObject
 {
     Q_OBJECT
     Q_DISABLE_COPY(RIK_Client)
-    RIK_Client() {}
+    RIK_Client() {cnt = 0;}
 
 public:
     static QObject *GetInstance(QQmlEngine *engine, QJSEngine *scriptEngine)
@@ -23,6 +26,8 @@ public:
 
         return new RIK_Client;
     }
+
+    int cnt;
 
 signals:
 
@@ -50,6 +55,8 @@ private:
     UdpClient ucli;
     TcpClient cli;
     RobotInfo robot;
+
+    fstream file;
 };
 
 #endif // RIK_CLIENT_H

@@ -91,6 +91,7 @@ int RIK_Client::send_target_path(QVector3D t1, QVector3D t2, QVector3D m1, QVect
 
 void RIK_Client::get_joints()
 {
+    //joints
     Eigen::VectorXf js;
     cli.get_current_joints(js);
     robot.update_joints(js);
@@ -98,7 +99,36 @@ void RIK_Client::get_joints()
     for (int i = 0; i < js.size(); ++i) {
         qDebug() << js(i);
     }
-//    return js;
+
+    //pose
+    Eigen::VectorXf p;
+    cli.get_current_pose(p);
+    robot.update_pose(p);
+    qDebug() << "current pose:";
+    for (int i = 0; i < p.size(); ++i) {
+        qDebug() << p(i);
+    }
+
+    //wirte file
+    file.open("log_joints_and_pose.txt",ios_base::app);
+    if(file.is_open()){
+        for(int i=0;i<js.size();++i){
+            file<<js(i)<<",";
+        }
+        for(int i=0;i<p.size();++i){
+            if(i<p.size()-1){
+                file<<p(i)<<",";
+            }
+            else{
+                file<<p(i);
+            }
+        }
+        file<<endl;
+        file.close();
+    }
+    else{
+        qDebug() << "file open fail";
+    }
 }
 
 void RIK_Client::get_pose()
