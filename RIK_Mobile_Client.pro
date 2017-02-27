@@ -10,7 +10,15 @@ SOURCES += main.cpp \
     tcpcommon.cpp \
     udpclient.cpp \
     rik_client.cpp \
-    robotinfo.cpp
+    robotinfo.cpp \
+    cvSix/CCalibrator.cpp \
+    cvSix/CLog.cpp \
+    cvSix/CPosTable.cpp \
+    cvSix/cvRun.cpp \
+    cvSix/NFindCorners.cpp \
+    cvSix/NFunc.cpp \
+    cvSix/NImage.cpp \
+    cvSix/NUtils.cpp
 
 RESOURCES += qml.qrc
 
@@ -28,4 +36,15 @@ HEADERS += \
     tcpcommon.h \
     udpclient.h \
     rik_client.h \
-    robotinfo.h
+    robotinfo.h \
+    cvSix/CCalibrator.h \
+    cvSix/CLog.h \
+    cvSix/CPosTable.h \
+    cvSix/cvRun.h \
+    cvSix/NFindCorners.h \
+    cvSix/NFunc.h \
+    cvSix/NImage.h \
+    cvSix/NUtils.h
+
+DISTFILES += \
+    RIK_Mobile_Client.pro.user
