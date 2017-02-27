@@ -6,9 +6,16 @@
 #include "pthread.h"
 
 #include "cvSix/cvRun.h"
+#include <cv.h>
 
 void *thread_cv(void *arg)
 {
+    char str[] = "-v";
+    while(1){
+    std::cout<<"before cv_run"<<std::endl;
+    cv_run(2, str);
+    std::cout<<"after cv_run"<<std::endl;
+    }
     return NULL;
 }
 

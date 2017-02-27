@@ -3,7 +3,8 @@ TEMPLATE = app
 QT += qml quick
 CONFIG += c++11
 
-INCLUDEPATH += Eigen
+INCLUDEPATH += Eigen \
+               /home/wzf/Softwares/opencv/opencv-2.4.9/include/opencv
 
 SOURCES += main.cpp \
     tcpclient.cpp \
@@ -46,5 +47,8 @@ HEADERS += \
     cvSix/NImage.h \
     cvSix/NUtils.h
 
+
 DISTFILES += \
     RIK_Mobile_Client.pro.user
+
+LIBS += -L/usr/local/lib -lopencv_core -lopencv_imgproc -lopencv_highgui -lopencv_calib3d
