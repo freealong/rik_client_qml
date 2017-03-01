@@ -17,6 +17,14 @@ int RIK_Client::connect_server(QString address, int port)
         qDebug() << "Error on TCP connecting";
         return -1;
     }
+
+    std::string cv_addr = "127.0.0.1";
+    int cv_port = 9000;
+    if (cv_cli.connect_server(cv_addr.c_str(), cv_port) < 0)
+    {
+        qDebug() << "Error on cv_TCP connecting";
+        return -1;
+    }
     return 0;
 }
 
@@ -150,6 +158,7 @@ int RIK_Client::send_increasing_mode(bool running, int mode, int num, float spee
 
 int RIK_Client::send_task(QString s1, QString s2, int loop_num)
 {
+    qDebug() << "s1 = "<< s1 << ", s2 = "<< s2 ;
     std::vector<Eigen::VectorXf> tasks;
     QStringList type_list = s1.split(";");
     QStringList params_list = s2.split(";");
@@ -188,6 +197,251 @@ int RIK_Client::send_msg(QString m)
 int RIK_Client::send_demo(int t)
 {
     return cli.send_demo(t);
+}
+
+int RIK_Client::send_save_img_msg()
+{
+    qDebug() << "save..";
+    get_joints();
+    QTimer::singleShot(3000, this, SLOT(auto_start()));
+    return cv_cli.send_msg("save");
+}
+
+int RIK_Client::auto_start()
+{
+    qDebug() << "auto_start..";
+    if(stop_flag){
+        qDebug() << "return 2";
+        return 2;
+    }
+
+    //send_task(QString s1, QString s2, int loop_num);
+    ++pose_num;
+    QString s1 = "";
+    s1 += "0";
+    s1 += ";";
+    QString s2 = "";
+    int runTime = 5000;
+    switch(pose_num){
+//    case 1:
+//        s2 = "860,0,846,0,0,0,4000;";
+//        break;
+    case 1:
+        s2 = "860,0,446,0,0,0,10000;";
+        runTime = 11000;
+        break;
+    case 2:
+        s2 = "860,0,446,0,0,30,4000;";
+        break;
+    case 3:
+        s2 = "860,0,446,0,0,60,4000;";
+        break;
+    case 4:
+        s2 = "860,0,446,0,0,90,4000;";
+        break;
+    case 5:
+        s2 = "860,0,446,0,0,120,4000;";
+        break;
+    case 6:
+        s2 = "860,0,446,0,0,110,4000;";
+        break;
+    case 7:
+        s2 = "860,0,446,0,0,80,4000;";
+        break;
+    case 8:
+        s2 = "860,0,446,0,0,50,4000;";
+        break;
+    case 9:
+        s2 = "860,0,446,0,0,20,4000;";
+        break;
+    case 10:
+        s2 = "860,0,446,0,0,-10,4000;";
+        break;
+    case 11:
+        s2 = "860,0,446,0,0,-40,4000;";
+        break;
+    case 12:
+        s2 = "860,0,446,0,0,-70,4000;";
+        break;
+    case 13:
+        s2 = "860,0,446,0,0,-100,4000;";
+        break;
+    case 14:
+        s2 = "860,0,446,0,0,-80,4000;";
+        break;
+    case 15:
+        s2 = "860,0,446,0,0,-50,4000;";
+        break;
+    case 16:
+        s2 = "860,0,446,0,0,-20,4000;";
+        break;
+    case 17:
+        s2 = "860,0,446,0,0,0,4000;";
+        break;
+    case 18:
+        s2 = "880,0,446,0,0,0,4000;";
+        break;
+    case 19:
+        s2 = "900,0,446,0,0,0,4000;";
+        break;
+    case 20:
+        s2 = "920,0,446,0,0,0,4000;";
+        break;
+    case 21:
+        s2 = "940,0,446,0,0,0,4000;";
+        break;
+    case 22:
+        s2 = "960,0,446,0,0,0,4000;";
+        break;
+    case 23:
+        s2 = "950,0,446,0,0,0,4000;";
+        break;
+    case 24:
+        s2 = "930,0,446,0,0,0,4000;";
+        break;
+    case 25:
+        s2 = "910,0,446,0,0,0,4000;";
+        break;
+    case 26:
+        s2 = "890,0,446,0,0,0,4000;";
+        break;
+    case 27:
+        s2 = "870,0,446,0,0,0,4000;";
+        break;
+    case 28:
+        s2 = "850,0,446,0,0,0,4000;";
+        break;
+    case 29:
+        s2 = "830,0,446,0,0,0,4000;";
+        break;
+    case 30:
+        s2 = "810,0,446,0,0,0,4000;";
+        break;
+    case 31:
+        s2 = "790,0,446,0,0,0,4000;";
+        break;
+    case 32:
+        s2 = "800,0,446,0,0,0,4000;";
+        break;
+    case 33:
+        s2 = "820,0,446,0,0,0,4000;";
+        break;
+    case 34:
+        s2 = "840,0,446,0,0,0,4000;";
+        break;
+    case 35:
+        s2 = "860,0,446,0,0,0,4000;";
+        break;
+    case 36:
+        s2 = "860,10,446,0,0,0,4000;";
+        break;
+    case 37:
+        s2 = "860,20,446,0,0,0,4000;";
+        break;
+    case 38:
+        s2 = "860,30,446,0,0,0,4000;";
+        break;
+    case 39:
+        s2 = "860,25,446,0,0,0,4000;";
+        break;
+    case 40:
+        s2 = "860,15,446,0,0,0,4000;";
+        break;
+    case 41:
+        s2 = "860,5,446,0,0,0,4000;";
+        break;
+    case 42:
+        s2 = "860,-5,446,0,0,0,4000;";
+        break;
+    case 43:
+        s2 = "860,-15,446,0,0,0,4000;";
+        break;
+    case 44:
+        s2 = "860,-25,446,0,0,0,4000;";
+        break;
+    case 45:
+        s2 = "860,-30,446,0,0,0,4000;";
+        break;
+    case 46:
+        s2 = "860,-20,446,0,0,0,4000;";
+        break;
+    case 47:
+        s2 = "860,-10,446,0,0,0,4000;";
+        break;
+    case 48:
+        s2 = "860,0,446,0,0,0,4000;";
+        break;
+    case 49:
+        s2 = "860,0,436,0,0,0,4000;";
+        break;
+    case 50:
+        s2 = "860,0,426,0,0,0,4000;";
+        break;
+    case 51:
+        s2 = "860,0,416,0,0,0,4000;";
+        break;
+    case 52:
+        s2 = "860,0,421,0,0,0,4000;";
+        break;
+    case 53:
+        s2 = "860,0,431,0,0,0,4000;";
+        break;
+    case 54:
+        s2 = "860,0,441,0,0,0,4000;";
+        break;
+    case 55:
+        s2 = "860,0,451,0,0,0,4000;";
+        break;
+    case 56:
+        s2 = "860,0,461,0,0,0,4000;";
+        break;
+    case 57:
+        s2 = "860,0,471,0,0,0,4000;";
+        break;
+    case 58:
+        s2 = "860,0,476,0,0,0,4000;";
+        break;
+    case 59:
+        s2 = "860,0,466,0,0,0,4000;";
+        break;
+    case 60:
+        s2 = "860,0,456,0,0,0,4000;";
+        break;
+    case 61:
+        s2 = "860,0,446,0,0,0,4000;";
+        break;
+    default:
+        qDebug() << "return 1";
+        return 1;
+    }
+    qDebug()<< "send_task..";
+    send_task(s1, s2, 1);
+    QTimer::singleShot(runTime, this, SLOT(send_save_img_msg()));
+    return 0;
+}
+
+int RIK_Client::disable_stop_flag()
+{
+    pose_num = 0;
+    stop_flag = false;
+    return 0;
+}
+
+int RIK_Client::enable_stop_flag()
+{
+    stop_flag = true;
+    return 0;
+}
+
+int RIK_Client::get_pose_num()
+{
+    return pose_num;
+}
+
+int RIK_Client::increase_pose_num()
+{
+    ++pose_num;
+    return 0;
 }
 
 int RIK_Client::download_robot_info()

@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QQmlApplicationEngine>
 #include <QVector3D>
+#include <QTimer>
 
 #include "udpclient.h"
 #include "tcpclient.h"
@@ -16,7 +17,7 @@ class RIK_Client : public QObject
 {
     Q_OBJECT
     Q_DISABLE_COPY(RIK_Client)
-    RIK_Client() {cnt = 0;}
+    RIK_Client() {cnt = 0; pose_num = 0; stop_flag = true;}
 
 public:
     static QObject *GetInstance(QQmlEngine *engine, QJSEngine *scriptEngine)
@@ -28,6 +29,8 @@ public:
     }
 
     int cnt;
+    int pose_num;
+    bool stop_flag;
 
 signals:
 
@@ -49,11 +52,20 @@ public slots:
     int send_msg(QString m);
     int send_demo(int t);
 
+    //use for cv
+    int send_save_img_msg();
+    int auto_start();
+    int disable_stop_flag();
+    int enable_stop_flag();
+    int get_pose_num();
+    int increase_pose_num();
+
 private:
     int download_robot_info();
 
     UdpClient ucli;
     TcpClient cli;
+    TcpClient cv_cli;
     RobotInfo robot;
 
     fstream file;

@@ -60,7 +60,7 @@ Item {
             }
             TextField{
                 id: loop_times
-                text: "-1"
+                text: "1"
             }
         }
 
@@ -249,6 +249,7 @@ Item {
             }
         }
         Row {
+            id:switch_demo
             anchors.top: row_demo.bottom
             anchors.topMargin: 10
             anchors.horizontalCenter: parent.horizontalCenter
@@ -259,7 +260,71 @@ Item {
             }
             Button {
                 text: "Switch demo"
-                onClicked: Client.send_demo(demo_id.currentIndex);
+                onClicked: Client.send_demo(demo_id.currentIndex)
+            }
+        }
+        Row {
+            anchors.top: switch_demo.bottom
+            anchors.topMargin: 10
+            anchors.horizontalCenter: parent.horizontalCenter
+            Button {
+                text: "next pose"
+                onClicked: {
+                    task_lm.clear()
+                    Client.increase_pose_num()
+                    switch(Client.get_pose_num()){
+                    case 1:
+                        task_lm.append({"type": "line", "params": "860,0,846,90,0,-90,2000"})
+                        break
+                    case 2:
+                        task_lm.append({"type": "line", "params": "860,0,836,90,0,-90,2000"})
+                        break
+                    case 3:
+                        task_lm.append({"type": "line", "params": "860,0,826,90,0,-90,2000"})
+                        break
+                    case 4:
+                        task_lm.append({"type": "line", "params": "860,10,826,90,0,-90,2000"})
+                        break
+                    case 5:
+                        task_lm.append({"type": "line", "params": "860,20,826,90,0,-90,2000"})
+                        break
+                    case 6:
+                        task_lm.append({"type": "line", "params": "870,20,826,90,0,-90,2000"})
+                        break
+                    case 7:
+                        task_lm.append({"type": "line", "params": "880,20,826,90,0,-90,2000"})
+                        break
+                    case 8:
+                        task_lm.append({"type": "line", "params": "890,30,816,90,0,-90,2000"})
+                        break
+                    case 9:
+                        task_lm.append({"type": "line", "params": "875,15,831,90,0,-90,2000"})
+                        break
+                    case 10:
+                        task_lm.append({"type": "line", "params": "860,0,846,90,0,-90,2000"})
+                        break
+                    default:
+                        break
+                    }
+                }
+            }
+
+            Button {
+                text: "save img"
+                onClicked: Client.send_save_img_msg()
+            }
+
+            Button {
+                text: "auto start"
+                onClicked: {
+                    Client.disable_stop_flag()
+                    Client.auto_start()
+                }
+            }
+
+            Button {
+                text: "stop"
+                onClicked: Client.enable_stop_flag()
             }
         }
     }
